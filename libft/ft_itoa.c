@@ -1,40 +1,57 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: darosas- <darosas-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/03 19:19:04 by darosas-          #+#    #+#             */
-/*   Updated: 2024/12/05 18:37:20 by darosas-         ###   ########.fr       */
+/*   Created: 2024/12/10 19:44:47 by darosas-          #+#    #+#             */
+/*   Updated: 2024/12/10 22:06:07 by darosas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
-int	ft_atoi(const char *s)
+static int	ft_counter(long int n)
 {
 	int	i;
-	int	nb;
-	int	neg;
 
 	i = 0;
-	nb = 0;
-	neg = 1;
-	while (s[i] == ' ' || s[i] == '\f' || s[i] == '\n' || s[i] == '\r'
-		|| s[i] == '\t' || s[i] == '\v')
-		i++;
-	if (s[i] == '-' || s[i] == '+')
+	while (n > 9)
 	{
-		if (s[i] == '-')
-			neg = -1;
+		n /= 10;
 		i++;
 	}
-	while (s[i] >= '0' && s[i] <= '9')
-	{
-		nb = (nb * 10) + (s[i] - 48);
-		i++;
-	}
-	return (nb * neg);
+	return (i + 1);
 }
+
+char	*ft_itoa(int n)
+{
+	char		*str;
+	long int	nb;
+	int			i;
+
+	nb = n;
+	if (n < 0)
+		nb *= -1;
+	i = ft_counter(nb);
+	if (n < 0)
+		i++;
+	str = (char *)malloc(sizeof(char) * (i + 1));
+	if (!str)
+		return (0);
+	str[i--] = '\0';
+	while (i >= 0)
+	{
+		str[i--] = (nb % 10) + '0';
+		nb /= 10;
+	}
+	if (n < 0)
+		str[0] = '-';
+	return (str);
+}
+
+/* int	main(void)
+{
+	ft_itoa(-2147483648);
+} */

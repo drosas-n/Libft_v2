@@ -6,7 +6,7 @@
 /*   By: darosas- <darosas-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 20:13:18 by darosas-          #+#    #+#             */
-/*   Updated: 2024/12/04 17:44:30 by darosas-         ###   ########.fr       */
+/*   Updated: 2024/12/05 15:43:20 by darosas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,12 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 		s_size += size;
 	else
 		s_size += d_size;
-	i = 0;
-	while (src[i] && d_size < (size - 1))
-		dst[d_size++] = src[i++];
-	dst[d_size] = '\0';
+	if (size > 0)
+	{
+		i = 0;
+		while (src[i] && d_size < (size - 1))
+			dst[d_size++] = src[i++];
+		dst[d_size] = '\0';
+	}
 	return (s_size);
 }

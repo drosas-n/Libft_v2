@@ -6,7 +6,7 @@
 /*   By: darosas- <darosas-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 20:12:58 by darosas-          #+#    #+#             */
-/*   Updated: 2024/12/04 17:44:49 by darosas-         ###   ########.fr       */
+/*   Updated: 2024/12/05 15:17:35 by darosas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 	if (size > 0)
 	{
 		while (src[i] && i < (size - 1))
-			dst[i++] = src[i];
+		{
+			dst[i] = src[i];
+			i++;
+		}
 		dst[i] = '\0';
 	}
 	return (ft_strlen(src));
